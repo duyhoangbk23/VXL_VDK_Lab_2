@@ -56,7 +56,27 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+static const uint8_t segCode[10] = {
+    0b1000000, // 0
+    0b1111001, // 1
+    0b0100100, // 2
+    0b0110000, // 3
+    0b0011001, // 4
+    0b0010010, // 5
+    0b0000010, // 6
+    0b1111000, // 7
+    0b0000000, // 8
+    0b0010000  // 9
+};
 
+void display7SEG(int num) {
+    if (num < 0 || num > 9) num = 0;
+
+    for (int i = 0; i < 7; i++) {
+        HAL_GPIO_WritePin(GPIOB, (1 << i),
+            (segCode[num] & (1 << i)) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+    }
+}
 /* USER CODE END 0 */
 
 /**
@@ -90,6 +110,7 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT (& htim2 );
+
 
   /* USER CODE END 2 */
 
@@ -224,12 +245,27 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 int counter = 100;
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	counter--;
-	if(counter <= 0){
-		counter = 100;
-		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-	}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+        counter--;
+
+        if (counter <=0) { // 500 * 1ms = 500ms
+            counter = 100;
+            HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
+        }
+
+        if (counter>50) {
+            // Bật LED1, tắt LED2
+            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_RESET);
+            display7SEG(1);
+        } else {
+            // Bật LED2, tắt LED1
+            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_SET);
+            display7SEG(2);
+        }
+
 }
 
 /* USER CODE END 4 */

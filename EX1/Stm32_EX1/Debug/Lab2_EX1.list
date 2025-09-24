@@ -526,33 +526,33 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  80003b4:	2b32      	cmp	r3, #50	; 0x32
  80003b6:	dd0d      	ble.n	80003d4 <HAL_TIM_PeriodElapsedCallback+0x4c>
             // Bật LED1, tắt LED2
-            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_SET);
- 80003b8:	2201      	movs	r2, #1
+            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_RESET);
+ 80003b8:	2200      	movs	r2, #0
  80003ba:	2140      	movs	r1, #64	; 0x40
  80003bc:	480f      	ldr	r0, [pc, #60]	; (80003fc <HAL_TIM_PeriodElapsedCallback+0x74>)
  80003be:	f000 fbc3 	bl	8000b48 <HAL_GPIO_WritePin>
-            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_RESET);
- 80003c2:	2200      	movs	r2, #0
+            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_SET);
+ 80003c2:	2201      	movs	r2, #1
  80003c4:	2180      	movs	r1, #128	; 0x80
  80003c6:	480d      	ldr	r0, [pc, #52]	; (80003fc <HAL_TIM_PeriodElapsedCallback+0x74>)
  80003c8:	f000 fbbe 	bl	8000b48 <HAL_GPIO_WritePin>
             display7SEG(1);
  80003cc:	2001      	movs	r0, #1
  80003ce:	f7ff febd 	bl	800014c <display7SEG>
-            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_RESET);
-            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_RESET);
             display7SEG(2);
         }
 
 }
  80003d2:	e00c      	b.n	80003ee <HAL_TIM_PeriodElapsedCallback+0x66>
-            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_RESET);
- 80003d4:	2200      	movs	r2, #0
+            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_SET);
+ 80003d4:	2201      	movs	r2, #1
  80003d6:	2140      	movs	r1, #64	; 0x40
  80003d8:	4808      	ldr	r0, [pc, #32]	; (80003fc <HAL_TIM_PeriodElapsedCallback+0x74>)
  80003da:	f000 fbb5 	bl	8000b48 <HAL_GPIO_WritePin>
-            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_SET);
- 80003de:	2201      	movs	r2, #1
+            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_RESET);
+ 80003de:	2200      	movs	r2, #0
  80003e0:	2180      	movs	r1, #128	; 0x80
  80003e2:	4806      	ldr	r0, [pc, #24]	; (80003fc <HAL_TIM_PeriodElapsedCallback+0x74>)
  80003e4:	f000 fbb0 	bl	8000b48 <HAL_GPIO_WritePin>

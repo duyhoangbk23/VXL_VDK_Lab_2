@@ -256,13 +256,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
         if (counter>50) {
             // Bật LED1, tắt LED2
-            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_SET);
-            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_SET);
             display7SEG(1);
         } else {
             // Bật LED2, tắt LED1
-            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_RESET);
-            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(GPIOA, EN1_Pin, GPIO_PIN_RESET);
             display7SEG(2);
         }
 

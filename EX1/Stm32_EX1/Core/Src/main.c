@@ -249,7 +249,7 @@ int counter = 100;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         counter--;
 
-        if (counter <=0) { // 500 * 1ms = 500ms
+        if (counter <=0) {
             counter = 100;
             HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
         }

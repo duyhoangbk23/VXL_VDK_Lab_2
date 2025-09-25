@@ -505,7 +505,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  8000396:	4a18      	ldr	r2, [pc, #96]	; (80003f8 <HAL_TIM_PeriodElapsedCallback+0x70>)
  8000398:	6013      	str	r3, [r2, #0]
 
-        if (counter <=0) { // 500 * 1ms = 500ms
+        if (counter <=0) {
  800039a:	4b17      	ldr	r3, [pc, #92]	; (80003f8 <HAL_TIM_PeriodElapsedCallback+0x70>)
  800039c:	681b      	ldr	r3, [r3, #0]
  800039e:	2b00      	cmp	r3, #0

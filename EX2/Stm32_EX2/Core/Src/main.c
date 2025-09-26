@@ -246,11 +246,10 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-int counter = 0;        // counts ms
-int currentSeg = 0;     // which 7-segment to display (0..3)
+int counter = 0;
+int currentSeg = 0;
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-    if (htim->Instance == TIM2) {
         counter++;
 
         // Blink DOT every 1000 ms
@@ -261,7 +260,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
         // Switch 7-segment every 500 ms
         if (counter % 50 == 0) {
-            // Disable all ENs first
+            // Disable all 7SEG
             HAL_GPIO_WritePin(GPIOA, EN0_Pin | EN1_Pin | EN2_Pin | EN3_Pin, GPIO_PIN_SET);
 
             // Enable current 7-segment and display number
@@ -291,7 +290,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
         // Optional: reset counter to prevent overflow
         if (counter >= 200) counter = 0; // resets every 2 seconds
-    }
 }
 
 

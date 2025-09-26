@@ -251,7 +251,10 @@ int index_led = 0;
 int led_buffer[4] = {1, 2, 3, 4};
 
 void update7SEG(int index){
-    switch (index) {
+//---------Testing random input-----------------
+//	led_buffer[index]=rand()%10;
+//----------------------------------------------
+	switch (index) {
     case 0:
     	HAL_GPIO_WritePin(GPIOA, EN1_Pin|EN2_Pin|EN3_Pin, GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOA, EN0_Pin, GPIO_PIN_RESET);
@@ -277,14 +280,12 @@ void update7SEG(int index){
     }
 }
 
-int counter = 0;   // counts ms
-
+int counter = 0;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
-    if (htim->Instance == TIM2) {
         counter++;
 
         // Blink DOT + RED LED every 1000 ms
-        if (counter % 1000 == 0) {
+        if (counter % 100 == 0) {
             HAL_GPIO_TogglePin(GPIOA, DOT_Pin);
             HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin);
         }
@@ -298,10 +299,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
             }
         }
 
-        if (counter >= 1000) counter = 0; // reset mỗi giây
-    }
-}
+        if (counter >= 100) counter = 0; // reset every sec
 
+}
 
 /* USER CODE END 4 */
 
